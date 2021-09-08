@@ -3,18 +3,18 @@ plugins {
     id("org.jetbrains.kotlin.android")
     `maven-publish`
     id("com.jfrog.artifactory")
-//    id("com.diffplug.spotless")
+    id("com.diffplug.spotless")
 }
 
 version = "0.0.2"
 group = "com.keygenqt.response"
 
-//spotless {
-//    kotlin {
-//        target("**/*.kt")
-//        licenseHeaderFile("$buildDir/../LICENSE")
-//    }
-//}
+spotless {
+    kotlin {
+        target("**/*.kt")
+        licenseHeaderFile("$buildDir/../LICENSE")
+    }
+}
 
 publishing {
     publications {
