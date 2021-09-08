@@ -35,8 +35,6 @@ dependencies {
 
 ### Extensions Retrofit2
 * responseCheck - Check status HTTP response retrofit2
-* responseCheckObject - Response Check with custom handling JSONObject
-* responseCheckArray - Response Check with custom handling JSONArray
 
 ### Extensions Other
 
