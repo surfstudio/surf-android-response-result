@@ -60,6 +60,22 @@ suspend fun getListFavorites(page: Int): ResponseResult<List<FavoriteModel>> {
     }
 }
 
+// Example custom check body response
+suspend fun sendCode(emailOrPhone: String): ResponseResult<Boolean> {
+    return withContext(Dispatchers.IO) {
+        executeWithResponse {
+            api.sendCode(contact = emailOrPhone)
+                .responseCheck { _, body ->
+                    JSONObject(body).apply {
+                        if (!getBoolean("sentSuccess")) throw Result422(getString("errorMsg"))
+                    }
+                }
+                .body()
+                ?.getAsJsonPrimitive("sentSuccess")?.asBoolean ?: false
+        }
+    }
+}
+
 // Example response processing
 val response = apiService.getListFavorites(
     page = page ?: 0
