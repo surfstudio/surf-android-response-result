@@ -35,15 +35,15 @@ suspend fun getListFavorites(page: Int): ResponseResult<List<FavoriteModel>> {
 
 ```kotlin
 apiService.getListFavorites(page = 0)
-.success { models ->
-    // Response Result success
-}.error {
-    // Response Result error
-}.done {
-    // End of request for any outcome
-}.errorUnknownHost {
-    // No internet error
-}
+    .success { models ->
+        // Response Result success
+    }.error {
+        // Response Result error
+    }.done {
+        // End of request for any outcome
+    }.errorUnknownHost {
+        // No internet error
+    }
 ```
 
 #### Example of processing a response for PagingSource
