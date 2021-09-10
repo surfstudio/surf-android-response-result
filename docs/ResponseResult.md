@@ -37,12 +37,12 @@ suspend fun getListFavorites(page: Int): ResponseResult<List<FavoriteModel>> {
 apiService.getListFavorites(page = 0)
     .success { models ->
         // Response Result success
-    }.error {
+    }.error { ex: Exception ->
         // Response Result error
+    }.errorUnknownHost { ex: Exception ->
+        // No internet error
     }.done {
         // End of request for any outcome
-    }.errorUnknownHost {
-        // No internet error
     }
 ```
 
