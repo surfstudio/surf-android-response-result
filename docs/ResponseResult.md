@@ -17,14 +17,6 @@
 * ResponseResult.errorUnknownHost - No internet error
 * ResponseResult.isEndYii2 - In some frameworks, the absence of a page always returns the latest data
 
-### Extensions Retrofit2
-* responseCheck - Check status HTTP response retrofit2
-
-### Extensions Other
-
-* Int.toHTTPResult - Code int to HTTPResult
-* executeWithResponse - Exception handling
-
 ### Usage
 
 ```kotlin
