@@ -34,11 +34,8 @@ suspend fun getListFavorites(page: Int): ResponseResult<List<FavoriteModel>> {
 #### Example of processing a response
 
 ```kotlin
-val response = apiService.getListFavorites(
-    page = page ?: 0
-)
-
-response.success { models ->
+apiService.getListFavorites(page = 0)
+.success { models ->
     // Response Result success
 }.error {
     // Response Result error
