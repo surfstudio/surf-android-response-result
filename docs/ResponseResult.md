@@ -1,10 +1,8 @@
-### Features
+### ResponseResult
 
-* ResponseResult - Base class response
-* HTTPResult - Sealed class with results exception with code and message
-* ResponseModel, ResponseModelRelation - Interfaces to help automate working with models
+Base class for intercepting events
 
-### Extensions ResponseResult
+#### Extensions ResponseResult
 
 * ResponseResult.size - The number of items in the response
 * ResponseResult.isEmpty - Checking if the response is empty
@@ -17,11 +15,9 @@
 * ResponseResult.errorUnknownHost - No internet error
 * ResponseResult.isEndYii2 - In some frameworks, the absence of a page always returns the latest data
 
-### Usage
+#### Example base service query
 
 ```kotlin
-
-// Example service query
 suspend fun getListFavorites(page: Int): ResponseResult<List<FavoriteModel>> {
     return withContext(Dispatchers.IO) {
         executeWithResponse { // Exception processing
@@ -33,24 +29,11 @@ suspend fun getListFavorites(page: Int): ResponseResult<List<FavoriteModel>> {
         }
     }
 }
+```
 
-// Example custom check body response
-suspend fun sendCode(emailOrPhone: String): ResponseResult<Boolean> {
-    return withContext(Dispatchers.IO) {
-        executeWithResponse {
-            api.sendCode(contact = emailOrPhone)
-                .responseCheck { _, body ->
-                    JSONObject(body).apply {
-                        if (!getBoolean("sentSuccess")) throw Result422(getString("errorMsg"))
-                    }
-                }
-                .body()
-                ?.getAsJsonPrimitive("sentSuccess")?.asBoolean ?: false
-        }
-    }
-}
+#### Example of processing a response
 
-// Example response processing
+```kotlin
 val response = apiService.getListFavorites(
     page = page ?: 0
 )
@@ -64,6 +47,27 @@ response.success { models ->
 }.errorUnknownHost {
     // No internet error
 }
+```
+
+#### Example of processing a response for PagingSource
+
+```kotlin
+return repository.getListFavorites(offset = offset).pagingSucceeded { data ->
+    LoadResult.Page(
+        data = data,
+        prevKey = if (offset == 0) null else offset,
+        nextKey = if (data.isEmpty()) null else offset + ConstantsPaging.PAGE_LIMIT
+    )
+}
+```
+
+#### Other extensions
+
+```kotlin
+// Example response processing
+val response = apiService.getListFavorites(
+    page = page ?: 0
+)
 
 // The number of items in the response
 println(response.size)
@@ -79,20 +83,4 @@ println(response.isError)
 
 // In some frameworks, the absence of a page always returns the latest data
 response.isEndYii2(state.lastItemOrNull()?.id)
-
-// MediatorResult
-MediatorResult.Success(
-    endOfPaginationReached = response.isError
-            || response.isEmpty
-            || response.isEndYii2(state.lastItemOrNull()?.id)
-)
-
-// PagingSource pagingSucceeded
-return repository.getListChats(search = search, offset = offset).pagingSucceeded { data ->
-    LoadResult.Page(
-        data = data,
-        prevKey = if (offset == 0) null else offset,
-        nextKey = if (data.isEmpty()) null else offset + ConstantsPaging.PAGE_LIMIT
-    )
-}
 ```
