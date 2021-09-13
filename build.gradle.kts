@@ -6,7 +6,7 @@ plugins {
     id("com.diffplug.spotless")
 }
 
-version = "0.0.2"
+version = "0.0.4"
 group = "com.keygenqt.response"
 
 spotless {
@@ -55,5 +55,5 @@ android {
 dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("androidx.paging:paging-compose:1.0.0-alpha12")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.30")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
 }

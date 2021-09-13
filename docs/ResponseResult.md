@@ -13,7 +13,6 @@ Base class for intercepting events
 * ResponseResult.error - Response Result error
 * ResponseResult.done - End of request for any outcome
 * ResponseResult.errorUnknownHost - No internet error
-* ResponseResult.isEndYii2 - In some frameworks, the absence of a page always returns the latest data
 
 #### Example base service query
 
@@ -77,7 +76,4 @@ println(response.isSucceeded)
 
 // Checking that the request was with an error
 println(response.isError)
-
-// In some frameworks, the absence of a page always returns the latest data
-response.isEndYii2(state.lastItemOrNull()?.id)
 ```

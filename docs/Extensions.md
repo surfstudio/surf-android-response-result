@@ -40,3 +40,27 @@ suspend fun sendCode(emailOrPhone: String): ResponseResult<Boolean> {
     }
 }
 ```
+
+#### Int.toHTTPResult
+
+Getting HTTPResult by error code
+
+```kotlin
+// throw result
+fun getHTTPResult(code: Int): Nothing {
+    throw code.toHTTPResult()
+}
+
+// get default value response message
+fun getMessageResponse(code: Int): String? {
+    return when(val result = code.toHTTPResult()) {
+        is HTTPResult.Result200 -> result.message
+        is HTTPResult.Result400 -> result.message
+        is HTTPResult.Result401 -> result.message
+        is HTTPResult.Result404 -> result.message
+        is HTTPResult.Result500 -> result.message
+        is HTTPResult.Result403 -> result.message
+        is HTTPResult.ResultUnknown -> result.message
+    }
+}
+```
