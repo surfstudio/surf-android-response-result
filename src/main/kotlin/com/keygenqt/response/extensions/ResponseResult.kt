@@ -48,8 +48,7 @@ val ResponseResult<*>?.size
  * @since 0.0.1
  * @author Vitaliy Zarubin
  */
-val ResponseResult<*>?.isEmpty
-    get() = this.size == 0
+val ResponseResult<*>?.isEmpty get() = this.size == 0
 
 /**
  * Checking that the request was successful
