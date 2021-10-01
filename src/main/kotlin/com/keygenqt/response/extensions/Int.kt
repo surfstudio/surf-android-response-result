@@ -13,14 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package com.keygenqt.response.extensions
 
 import com.keygenqt.response.HTTPResult
+import kotlin.reflect.full.createInstance
 
 fun Int.toHTTPResult(): HTTPResult {
     return HTTPResult::class.sealedSubclasses
-        .firstOrNull { it.objectInstance?.code == this }
-        ?.objectInstance
+        .map { it.objectInstance ?: it.createInstance() }
+        .firstOrNull { it.code == this }
         ?: HTTPResult.ResultUnknown()
 }

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.keygenqt.response
+package com.keygenqt.response.extensions
 
+import com.keygenqt.response.HTTPResult
 import com.keygenqt.response.HTTPResult.*
-import com.keygenqt.response.extensions.toHTTPResult
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Response
