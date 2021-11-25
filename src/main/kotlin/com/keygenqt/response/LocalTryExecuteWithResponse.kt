@@ -33,14 +33,16 @@ object LocalTryExecuteWithResponse {
     /**
      * Exception handling
      *
-     * @since 0.0.4
+     * @since 0.0.5
      * @author Vitaliy Zarubin
      */
-    inline fun <T> executeWithResponse(body: () -> T): ResponseResult<T> {
+    inline fun <T> executeWithResponse(emit: Boolean = true, body: () -> T): ResponseResult<T> {
         return try {
             ResponseResult.Success(body.invoke())
         } catch (e: Exception) {
-            tryEmit(e)
+            if (emit) {
+                tryEmit(e)
+            }
             ResponseResult.Error(e)
         }
     }
