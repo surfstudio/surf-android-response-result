@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Vitaliy Zarubin
+ * Copyright 2021 Surf LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
+package ru.surfstudio.compose.response
 
-package com.keygenqt.response.extensions
-
-import com.keygenqt.response.HTTPResult
-import kotlin.reflect.full.createInstance
-
-fun Int.toHTTPResult(): HTTPResult {
-    return HTTPResult::class.sealedSubclasses
-        .map { it.objectInstance ?: it.createInstance() }
-        .firstOrNull { it.code == this }
-        ?: HTTPResult.ResultUnknown()
+/**
+ * Base Response Processing Class
+ *
+ * @since 0.0.1
+ * @author Vitaliy Zarubin
+ */
+sealed class ResponseResult<out R> {
+    data class Success<out T>(val data: T) : ResponseResult<T>()
+    data class Error(val exception: Exception) : ResponseResult<Nothing>()
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Vitaliy Zarubin
+ * Copyright 2021 Surf LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
+package ru.surfstudio.compose.response.extensions
 
-package com.keygenqt.response.extensions
-
-import com.keygenqt.response.HTTPResult
-import com.keygenqt.response.HTTPResult.*
+import ru.surfstudio.compose.response.HTTPResult
+import ru.surfstudio.compose.response.HTTPResult.*
 import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Response

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 Vitaliy Zarubin
+ * Copyright 2021 Surf LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package com.keygenqt.response.extensions
+ 
+package ru.surfstudio.compose.response.extensions
 
 import androidx.paging.PagingSource
-import com.keygenqt.response.ResponseResult
+import ru.surfstudio.compose.response.ResponseResult
 import java.net.UnknownHostException
 
 /**
