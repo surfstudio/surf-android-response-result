@@ -9,15 +9,16 @@ plugins {
 val kotlinVersion: String by project
 
 // lib info
-version = "0.0.7"
-group = "ru.surfstudio.compose"
+val libVersion: String by project
+val libGroup: String by project
 
 publishing {
     publications {
         register("aar", MavenPublication::class) {
-            groupId = group.toString()
+            version = libVersion
+            groupId = libGroup
             artifactId = project.name
-            artifact("$buildDir/outputs/aar/android-response-result-$version-release.aar")
+            artifact("$buildDir/outputs/aar/android-response-result-$libVersion-release.aar")
         }
     }
 }
@@ -44,7 +45,7 @@ android {
     defaultConfig {
         minSdk = 23
         targetSdk = 31
-        setProperty("archivesBaseName", "android-response-result-$version")
+        setProperty("archivesBaseName", "android-response-result-$libVersion")
     }
 
     buildTypes {
