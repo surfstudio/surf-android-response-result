@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 package ru.surfstudio.compose.response.extensions
 
 import androidx.paging.PagingSource
 import ru.surfstudio.compose.response.ResponseResult
+import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 /**
@@ -112,6 +113,19 @@ inline infix fun <T> ResponseResult<T>.success(predicate: (data: T) -> Unit): Re
 }
 
 /**
+ * Response Result success null data
+ *
+ * @since 0.0.10
+ * @author Vitaliy Zarubin
+ */
+inline infix fun <T> ResponseResult<T>.empty(predicate: () -> Unit): ResponseResult<T> {
+    if (this is ResponseResult.Success && this.data == null) {
+        predicate.invoke()
+    }
+    return this
+}
+
+/**
  * Response Result error
  *
  * @since 0.0.1
@@ -119,7 +133,7 @@ inline infix fun <T> ResponseResult<T>.success(predicate: (data: T) -> Unit): Re
  */
 inline infix fun <T> ResponseResult<T>.error(predicate: (data: Exception) -> Unit): ResponseResult<T> {
     if (this is ResponseResult.Error) {
-        if (this.exception !is UnknownHostException) {
+        if (this.exception !is UnknownHostException && this.exception !is SocketTimeoutException) {
             predicate.invoke(this.exception)
         }
     }
@@ -135,6 +149,21 @@ inline infix fun <T> ResponseResult<T>.error(predicate: (data: Exception) -> Uni
 inline infix fun <T> ResponseResult<T>.errorUnknownHost(predicate: (data: Exception) -> Unit): ResponseResult<T> {
     if (this is ResponseResult.Error) {
         if (this.exception is UnknownHostException) {
+            predicate.invoke(this.exception)
+        }
+    }
+    return this
+}
+
+/**
+ * No internet error
+ *
+ * @since 0.0.10
+ * @author Vitaliy Zarubin
+ */
+inline infix fun <T> ResponseResult<T>.errorTimeout(predicate: (data: Exception) -> Unit): ResponseResult<T> {
+    if (this is ResponseResult.Error) {
+        if (this.exception is SocketTimeoutException) {
             predicate.invoke(this.exception)
         }
     }
