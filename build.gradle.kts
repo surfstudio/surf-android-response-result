@@ -1,14 +1,13 @@
 buildscript {
 
     val kotlinVersion: String by project
-    val gradleVersion: String by project
 
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:$gradleVersion")
+        classpath("com.android.tools.build:gradle:7.0.4")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
     }
 }
@@ -25,12 +24,5 @@ subprojects {
             target("**/*.kt")
             licenseHeaderFile(file("${project.rootDir}/spotless/LicenseHeader"))
         }
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
     }
 }
