@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import ru.surfstudio.compose.response.ResponseResult
 import ru.surfstudio.compose.response.extensions.*
 
-class QueryActions(val viewModel: ViewModel) {
+class QueryActions(private val viewModel: ViewModel) {
 
     /**
      * Action state
