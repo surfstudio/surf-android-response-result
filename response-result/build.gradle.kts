@@ -6,8 +6,8 @@ plugins {
 }
 
 // dependencies versions
-val kotlinVersion: String by project
-val composeVersion: String by project
+val kotlinVersion: String = findProperty("kotlinVersion") as? String ?: "1.6.0"
+val composeVersion: String = findProperty("composeVersion") as? String ?: "1.1.0-rc01"
 
 // lib info
 val libVersion: String by project
@@ -71,12 +71,15 @@ android {
 dependencies {
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0")
+    implementation("androidx.paging:paging-compose:1.0.0-alpha14")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("androidx.paging:paging-compose:1.0.0-alpha14")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinVersion")
     implementation("org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.1")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
+
     testImplementation("com.squareup.okhttp3:mockwebserver:5.0.0-alpha.3")
     testImplementation("org.mockito:mockito-core:4.2.0")
 }

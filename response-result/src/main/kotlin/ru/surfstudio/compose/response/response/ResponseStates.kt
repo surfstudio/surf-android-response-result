@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-package ru.surfstudio.compose.response.queryActions
+package ru.surfstudio.compose.response.response
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -26,17 +25,19 @@ import kotlinx.coroutines.launch
 import ru.surfstudio.compose.response.ResponseResult
 import ru.surfstudio.compose.response.extensions.*
 
-class QueryActions(private val viewModel: ViewModel) {
-
+class ResponseStates(
+    private val viewModel: ViewModel,
+    private val errorHandler: (Exception) -> ResponseState = { ResponseState.Error(it) }
+) {
     /**
      * Action state
      */
-    private val _state: MutableStateFlow<QueryState> = MutableStateFlow(QueryState.Start)
+    private val _state: MutableStateFlow<ResponseState> = MutableStateFlow(ResponseState.Start)
 
     /**
      * [StateFlow] for [_state]
      */
-    val state: StateFlow<QueryState> get() = _state.asStateFlow()
+    val state: StateFlow<ResponseState> get() = _state.asStateFlow()
 
     /**
      * Launch query
@@ -45,7 +46,7 @@ class QueryActions(private val viewModel: ViewModel) {
         query: suspend CoroutineScope.() -> ResponseResult<T>
     ) {
         // set loading
-        _state.value = QueryState.Action
+        _state.value = ResponseState.Action
         // launch scope
         viewModel.viewModelScope.launch {
             query()
@@ -61,13 +62,13 @@ class QueryActions(private val viewModel: ViewModel) {
      * Set state Success
      */
     private fun <T> setSuccess(data: T?) {
-        _state.value = QueryState.Success(data)
+        _state.value = ResponseState.Success(data)
     }
 
     /**
      * Set state exception Error
      */
     private fun setError(exception: Exception) {
-        _state.value = QueryState.Error(exception)
+        _state.value = errorHandler.invoke(exception)
     }
 }

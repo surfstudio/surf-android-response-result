@@ -19,17 +19,14 @@ dependencies {
 
 ## Features:
 
-### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/sync_alt/materialicons/18dp/1x/baseline_sync_alt_black_18dp.png?raw=true) [ResponseResult](https://keygenqt.github.io/android-response-result/ResponseResult)
+### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/sync_alt/materialicons/18dp/1x/baseline_sync_alt_black_18dp.png?raw=true) ResponseResult
 Base class for intercepting events
 
-### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/extension/materialicons/18dp/1x/baseline_extension_black_18dp.png?raw=true) [Extensions](https://keygenqt.github.io/android-response-result/Extensions)
-A large set extensions for responses
-
-### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/note_add/materialicons/18dp/1x/baseline_note_add_black_18dp.png?raw=true) [LocalTryExecuteWithResponse](https://keygenqt.github.io/android-response-result/LocalTryExecuteWithResponse)
+### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/note_add/materialicons/18dp/1x/baseline_note_add_black_18dp.png?raw=true) RequestHandler
 An object to catch errors and allow you to subscribe and listen to them
 
-### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/note_add/materialicons/18dp/1x/baseline_note_add_black_18dp.png?raw=true) QueryState
-A UI representation for query state which simplifies usage at screens logic
+### ![picture](https://github.com/google/material-design-icons/blob/master/png/action/note_add/materialicons/18dp/1x/baseline_note_add_black_18dp.png?raw=true) ResponseState
+A UI representation for response state which simplifies usage at screens logic
 
 ## License
 
