@@ -13,28 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-package ru.surfstudio.compose.response.queryActions
+package ru.surfstudio.compose.response.response
 
-sealed class QueryState {
+sealed class ResponseState {
 
     /**
      * Start state
      */
-    object Start : QueryState()
+    object Start : ResponseState()
 
     /**
      * Action state
      */
-    object Action : QueryState()
+    object Action : ResponseState()
 
     /**
      * Error state with value error
      */
-    data class Error(val exception: Exception) : QueryState()
+    data class Error(val exception: Exception) : ResponseState()
 
     /**
      * Success state with data
      */
-    data class Success<T>(val data: T) : QueryState()
+    data class Success<T>(val data: T) : ResponseState()
 }

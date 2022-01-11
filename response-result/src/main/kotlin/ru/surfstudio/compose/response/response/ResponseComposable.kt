@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
-package ru.surfstudio.compose.response.queryActions
+package ru.surfstudio.compose.response.response
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,10 +21,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 
+/**
+ * Listen in compose state query
+ *
+ * @author Vitaliy Zarubin
+ */
 @Composable
-fun QueryActionsState(
-    state: QueryState,
-    block: QueryState.() -> Unit
+fun ResponseComposable(
+    state: ResponseState,
+    block: ResponseState.() -> Unit
 ) {
     var statusSaved: String? by rememberSaveable { mutableStateOf(null) }
     if (statusSaved != state.toString()) {
