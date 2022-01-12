@@ -29,11 +29,14 @@ import androidx.compose.runtime.setValue
 @Composable
 fun ResponseComposable(
     state: ResponseState,
-    block: ResponseState.() -> Unit
+    clear: () -> Unit,
+    block: @Composable ResponseState.() -> Unit
 ) {
     var statusSaved: String? by rememberSaveable { mutableStateOf(null) }
+
     if (statusSaved != state.toString()) {
         statusSaved = state.toString()
+        clear.invoke()
         block.invoke(state)
     }
 }
