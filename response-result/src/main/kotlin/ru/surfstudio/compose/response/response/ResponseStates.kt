@@ -18,6 +18,7 @@ package ru.surfstudio.compose.response.response
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -44,11 +45,11 @@ class ResponseStates(
      */
     fun <T> queryLaunch(
         query: suspend CoroutineScope.() -> ResponseResult<T>
-    ) {
+    ): Job {
         // set loading
         _state.value = ResponseState.Action
         // launch scope
-        viewModel.viewModelScope.launch {
+        val job = viewModel.viewModelScope.launch {
             query()
                 .success(::setSuccess)
                 .error(::setError)
@@ -56,6 +57,12 @@ class ResponseStates(
                 .errorTimeout(::setError)
                 .empty { setSuccess(null) }
         }
+        job.invokeOnCompletion {
+            if (_state.value is ResponseState.Action) {
+                _state.value = ResponseState.Close
+            }
+        }
+        return job
     }
 
     /**
