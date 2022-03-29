@@ -18,6 +18,11 @@ package ru.surfstudio.compose.response.response
 sealed class ResponseState {
 
     /**
+     * Job cancel state
+     */
+    object Cancel : ResponseState()
+
+    /**
      * Start state
      */
     object Start : ResponseState()
