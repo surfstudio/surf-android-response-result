@@ -59,7 +59,7 @@ class ResponseStates(
         }
         job.invokeOnCompletion {
             if (_state.value is ResponseState.Action) {
-                _state.value = ResponseState.Close
+                _state.value = ResponseState.Cancel
             }
         }
         return job

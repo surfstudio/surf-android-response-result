@@ -20,7 +20,7 @@ sealed class ResponseState {
     /**
      * Job cancel state
      */
-    object Close : ResponseState()
+    object Cancel : ResponseState()
 
     /**
      * Start state
